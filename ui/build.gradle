@@ -1,5 +1,6 @@
 apply from: '../library.gradle'
-apply plugin: 'kotlin-android'
+
+def appcompat_version = "25.3.1"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -9,4 +10,9 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    compile "com.android.support:appcompat-v7:$appcompat_version"
+
+    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/login_margin">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/login_email_edittext"
+        style="@style/MaterialEditText"
+        android:hint="login"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:nextFocusForward="@+id/login_password_edittext" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/login_password_edittext"
+        style="@style/MaterialEditText"
+        android:layout_below="@id/login_email_edittext"
+        android:layout_marginTop="@dimen/standard_margin"
+        android:hint="password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/login_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_password_edittext"
+        android:text="Login"/>
+
+</RelativeLayout>
