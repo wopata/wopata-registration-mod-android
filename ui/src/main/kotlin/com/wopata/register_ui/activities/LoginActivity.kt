@@ -2,9 +2,12 @@ package com.wopata.register_ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import butterknife.bindView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.CustomUser
 import com.wopata.register_ui.R
@@ -24,7 +27,7 @@ class LoginActivity : AbstractRegisterActivity() {
         signInButton.setOnClickListener {
             signIn()
         }
-        signInButton.setOnEditorActionListener { _, _, _ ->
+        passwordEditText.setOnEditorActionListener { _, _, _ ->
             signIn()
             true
         }
@@ -47,13 +50,23 @@ class LoginActivity : AbstractRegisterActivity() {
 
     private fun signIn() {
         if (checkLogin()) {
-/*                val intent = Intent()
+            val dialog = MaterialDialog.Builder(this)
+                    .progress(true, 0)
+                    .show()
+
+            val handler = Handler()
+            handler.postDelayed({
                 val user = CustomUser(username = usernameEditText.text.toString(), password = passwordEditText.text.toString())
-                intent.putExtra("toto", user)
-                setResult(SIGNIN_CUSTOM_RESULT_CODE, intent)
-                finish()*/
-            val user = CustomUser(username = usernameEditText.text.toString(), password = passwordEditText.text.toString())
-            RegisterManager.signIn(RegisterManager.RegisterType.CUSTOM, user)
+                RegisterManager.signIn(RegisterManager.RegisterType.CUSTOM, user,
+                        success = {
+                            Log.d("test", "Sign in success")
+                            dialog.dismiss()
+                        },
+                        failure = {
+                            Log.d("test", "Sign in failure")
+                            dialog.dismiss()
+                        })
+            }, 2000)
         }
     }
 

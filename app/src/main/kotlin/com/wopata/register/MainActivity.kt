@@ -18,11 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         RegisterManager.initialize(
-                signInBlock = {
-                    Log.d("tot", "Sign in")
+                signInBlock = { user, success, failure ->
+                    Log.d("test", "Sign in")
+                    success()
                 },
-                signUpBlock = {
-
+                signUpBlock = { user, success, failure ->
+                    Log.d("test", "Sign up")
+                    success()
                 }
         )
 
