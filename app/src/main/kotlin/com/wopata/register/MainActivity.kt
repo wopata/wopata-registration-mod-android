@@ -2,6 +2,7 @@ package com.wopata.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Button
@@ -19,12 +20,21 @@ class MainActivity : AppCompatActivity() {
 
         RegisterManager.initialize(
                 signInBlock = { user, success, failure ->
-                    Log.d("test", "Sign in")
-                    success()
+                    // DO YOUR SIGN IN LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                    val handler = Handler()
+                    handler.postDelayed({
+                        Log.d("test", "Sign in")
+                        success()
+                    }, 2000)
+
                 },
                 signUpBlock = { user, success, failure ->
-                    Log.d("test", "Sign up")
-                    success()
+                    // DO YOUR SIGN UP LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                    val handler = Handler()
+                    handler.postDelayed({
+                        Log.d("test", "Sign up")
+                        success()
+                    }, 2000)
                 }
         )
 

@@ -26,18 +26,18 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
     protected val passwordEditText: MaterialEditText by bindView(R.id.login_password_edittext)
     protected val passwordConfirmationEditText: MaterialEditText? by bindOptionalView(R.id.login_password_confirmation_edittext)
 
-    protected fun checkLogin(): Boolean {
-        val emptyValidator = object : METValidator("Cannot be empty") {
-            override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                return !isEmpty
-            }
+    protected val emptyValidator = object : METValidator("Cannot be empty") {
+        override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
+            return !isEmpty
         }
-        val emailValidator = object : METValidator("Email not valid") {
-            override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
-                return Patterns.EMAIL_ADDRESS.matcher(text).matches()
-            }
+    }
+    protected val emailValidator = object : METValidator("Email not valid") {
+        override fun isValid(text: CharSequence, isEmpty: Boolean): Boolean {
+            return Patterns.EMAIL_ADDRESS.matcher(text).matches()
         }
+    }
 
+    protected open fun checkFields(): Boolean {
         var isValid = usernameEditText.validateWith(emptyValidator)
         isValid = isValid and (usernameEditText.validateWith(emailValidator))
         isValid = isValid and (passwordEditText.validateWith(emptyValidator))

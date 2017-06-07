@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/login_margin"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <ImageView
@@ -16,7 +17,7 @@
             android:background="@android:color/black" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_email_edittext"
+            android:id="@+id/login_username_edittext"
             style="@style/MaterialEditText"
             android:hint="login"
             android:imeOptions="actionNext"
@@ -36,7 +37,7 @@
             android:id="@+id/login_password_confirmation_edittext"
             style="@style/MaterialEditText"
             android:layout_marginTop="@dimen/standard_margin"
-            android:hint="password"
+            android:hint="password confirm"
             android:imeOptions="actionDone"
             android:inputType="textPassword" />
 
