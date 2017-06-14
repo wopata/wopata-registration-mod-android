@@ -12,7 +12,7 @@ import com.wopata.register_ui.activities.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
-    val registerButton: Button by bindView(R.id.register_button)
+    private val registerButton: Button by bindView(R.id.register_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -16,8 +16,8 @@ import com.wopata.register_ui.R
  */
 class LoginActivity : AbstractRegisterActivity() {
 
-    val signInButton: Button by bindView(R.id.login_sign_in_button)
-    val signUpButton: TextView by bindView(R.id.login_sign_up_button)
+    private val signInButton: Button by bindView(R.id.login_sign_in_button)
+    private val signUpButton: TextView by bindView(R.id.login_sign_up_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
