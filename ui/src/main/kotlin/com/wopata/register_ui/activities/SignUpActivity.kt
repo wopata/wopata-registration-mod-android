@@ -1,10 +1,9 @@
 package com.wopata.register_ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import butterknife.bindView
-import com.afollestad.materialdialogs.MaterialDialog
 import com.rengwuxian.materialedittext.validation.METValidator
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.CustomUser
@@ -19,7 +18,8 @@ class SignUpActivity : AbstractRegisterActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_signup)
+
+        toolbar.title = "S'inscrire"
 
         signUpButton.setOnClickListener {
             signUp()
@@ -28,6 +28,10 @@ class SignUpActivity : AbstractRegisterActivity() {
             signUp()
             true
         }
+    }
+
+    override fun getContentLayout(): Int {
+        return R.layout.activity_signup
     }
 
     override fun checkFields(): Boolean {
@@ -49,18 +53,17 @@ class SignUpActivity : AbstractRegisterActivity() {
 
     private fun signUp() {
         if (checkFields()) {
-            val dialog = MaterialDialog.Builder(this)
-                    .progress(true, 0)
-                    .show()
+            val dialog = showWaitingDialog()
 
             val user = CustomUser(username = usernameEditText.text.toString(), password = passwordEditText.text.toString())
             RegisterManager.signUp(RegisterManager.RegisterType.CUSTOM, user,
                     success = {
-                        Log.d("test", "Sign up success")
+                        Toast.makeText(this, "Sign up success", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
+                        finish()
                     },
                     failure = {
-                        Log.d("test", "Sign up failure")
+                        Toast.makeText(this, "Sign up failure", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     })
         }

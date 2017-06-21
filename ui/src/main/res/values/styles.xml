@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="RegisterTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/register_primary_color</item>
+        <item name="colorPrimaryDark">@color/register_primary_color</item>
+        <item name="colorAccent">@color/register_accent_color</item>
+    </style>
+
     <style name="MaterialEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">1</item>
         <item name="android:textSize">16sp</item>
         <item name="met_floatingLabel">highlight</item>
-        <item name="met_primaryColor">#34A548</item>
+        <item name="met_baseColor">@color/register_secondary_text_color</item>
+        <item name="met_primaryColor">@android:color/black</item>
+    </style>
+
+    <style name="RegisterButton" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_colors</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
 </resources>
