@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import butterknife.bindOptionalView
 import butterknife.bindView
-import com.afollestad.materialdialogs.MaterialDialog
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
 import com.wopata.register_ui.R
@@ -61,12 +60,6 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
         }
 
         return isValid
-    }
-
-    protected open fun showWaitingDialog(): MaterialDialog {
-        return MaterialDialog.Builder(this)
-                .progress(true, 0)
-                .show()
     }
 
 }

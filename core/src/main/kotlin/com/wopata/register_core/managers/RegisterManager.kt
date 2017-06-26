@@ -1,49 +1,58 @@
 package com.wopata.register_core.managers
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import com.wopata.register_core.models.User
 import com.wopata.register_core.preferences.UserPreferences
+import kotlin.reflect.KClass
 
 /**
  * Created by stephenvinouze on 07/06/2017.
  */
 object RegisterManager {
 
-    private lateinit var signInBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit
-    private lateinit var signUpBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit
-    private lateinit var resetBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit
+    private lateinit var signInBlock: (activity: Activity, user: User) -> Unit
+    private lateinit var signUpBlock: (activity: Activity, user: User) -> Unit
+    private lateinit var resetBlock: (activity: Activity, user: User) -> Unit
 
-    fun initialize(signInBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit,
-                   signUpBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit,
-                   resetBlock: (user: User, success: () -> Unit, failure: () -> Unit) -> Unit) {
+    fun initialize(signInBlock: (activity: Activity, user: User) -> Unit,
+                   signUpBlock: (activity: Activity, user: User) -> Unit,
+                   resetBlock: (activity: Activity, user: User) -> Unit) {
         this.signInBlock = signInBlock
         this.signUpBlock = signUpBlock
         this.resetBlock = resetBlock
+    }
+
+    fun finish(context: Context, clazz: KClass<*>) {
+        val intent = Intent(context, clazz.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        context.startActivity(intent)
     }
 
     fun user(context: Context): User {
         return UserPreferences.read(context)
     }
 
-    fun signIn(user: User, success: () -> Unit, failure: () -> Unit) {
+    fun signIn(activity: Activity, user: User) {
         try {
-            signInBlock(user, success, failure)
+            signInBlock(activity, user)
         } catch (e: UninitializedPropertyAccessException) {
             throw IllegalStateException("SignInBlock not initialized. Call RegisterManager.initialize() first and configure your blocks")
         }
     }
 
-    fun signUp(user: User, success: () -> Unit, failure: () -> Unit) {
+    fun signUp(activity: Activity, user: User) {
         try {
-            signUpBlock(user, success, failure)
+            signUpBlock(activity, user)
         } catch (e: UninitializedPropertyAccessException) {
             throw IllegalStateException("SignUpBlock not initialized. Call RegisterManager.initialize() first and configure your blocks")
         }
     }
 
-    fun reset(user: User, success: () -> Unit, failure: () -> Unit) {
+    fun reset(activity: Activity, user: User) {
         try {
-            resetBlock(user, success, failure)
+            resetBlock(activity, user)
         } catch (e: UninitializedPropertyAccessException) {
             throw IllegalStateException("resetBlock not initialized. Call RegisterManager.initialize() first and configure your blocks")
         }

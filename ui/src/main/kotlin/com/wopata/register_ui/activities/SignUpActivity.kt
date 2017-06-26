@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.User
@@ -42,19 +41,7 @@ class SignUpActivity : AbstractRegisterActivity() {
 
     private fun signUp() {
         if (checkFields()) {
-            val dialog = showWaitingDialog()
-
-            RegisterManager.signUp(
-                    user = User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), token = null, source = UserSource.NATIVE),
-                    success = {
-                        Toast.makeText(this, "Sign up success", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                        finish()
-                    },
-                    failure = {
-                        Toast.makeText(this, "Sign up failure", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                    })
+            RegisterManager.signUp(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), token = null, source = UserSource.NATIVE))
         }
     }
 

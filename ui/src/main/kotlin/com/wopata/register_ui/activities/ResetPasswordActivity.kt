@@ -2,9 +2,7 @@ package com.wopata.register_ui.activities
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import butterknife.bindView
-import com.rengwuxian.materialedittext.MaterialEditText
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.User
 import com.wopata.register_core.models.UserSource
@@ -37,19 +35,7 @@ class ResetPasswordActivity : AbstractRegisterActivity() {
 
     private fun reset() {
         if (checkFields()) {
-            val dialog = showWaitingDialog()
-
-            RegisterManager.reset(
-                    user = User(username = usernameEditText.text.toString(), password = null, token = null, source = UserSource.NATIVE),
-                    success = {
-                        Toast.makeText(this, "Reset password success", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                        finish()
-                    },
-                    failure = {
-                        Toast.makeText(this, "Reset password failure", Toast.LENGTH_SHORT).show()
-                        dialog.dismiss()
-                    })
+            RegisterManager.reset(this, User(username = usernameEditText.text.toString(), password = null, token = null, source = UserSource.NATIVE))
         }
     }
 

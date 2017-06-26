@@ -1,11 +1,13 @@
 package com.wopata.register
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import butterknife.bindView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_ui.activities.SignInActivity
 
@@ -22,30 +24,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         RegisterManager.initialize(
-                signInBlock = { user, success, failure ->
-                    // TODO : DO YOUR SIGN IN LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                signInBlock = { activity, user ->
+                    val dialog = showWaitingDialog(activity)
                     val handler = Handler()
                     handler.postDelayed({
-                        success()
+                        dialog.dismiss()
+                        RegisterManager.finish(this, MainActivity::class)
                     }, TIME_OUT)
                 },
-                signUpBlock = { user, success, failure ->
-                    // TODO : DO YOUR SIGN UP LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                signUpBlock = { activity, user ->
+                    val dialog = showWaitingDialog(activity)
                     val handler = Handler()
                     handler.postDelayed({
-                        success()
+                        dialog.dismiss()
+                        RegisterManager.finish(this, MainActivity::class)
                     }, TIME_OUT)
                 },
-                resetBlock = { user, success, failure ->
-                    // TODO : DO YOUR RESET PASSWORD LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                resetBlock = { activity, user ->
+                    val dialog = showWaitingDialog(activity)
                     val handler = Handler()
                     handler.postDelayed({
-                        success()
+                        dialog.dismiss()
+                        RegisterManager.finish(this, MainActivity::class)
                     }, TIME_OUT)
                 }
         )
 
         registerButton.setOnClickListener { startActivity(Intent(this, SignInActivity::class.java)) }
+    }
+
+    private fun showWaitingDialog(activity: Activity): MaterialDialog {
+        return MaterialDialog.Builder(activity)
+                .progress(true, 0)
+                .show()
     }
 
 }
