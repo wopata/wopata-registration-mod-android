@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import butterknife.bindOptionalView
 import butterknife.bindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rengwuxian.materialedittext.MaterialEditText
@@ -20,7 +21,7 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
 
     protected val toolbar: Toolbar by bindView(R.id.register_toolbar)
     protected val usernameEditText: MaterialEditText by bindView(R.id.login_username_edittext)
-    protected val passwordEditText: MaterialEditText by bindView(R.id.login_password_edittext)
+    protected val passwordEditText: MaterialEditText? by bindOptionalView(R.id.login_password_edittext)
     private val container: FrameLayout by bindView(R.id.register_activity_container)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +56,9 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
 
         var isValid = usernameEditText.validateWith(emailValidator)
         isValid = isValid and (usernameEditText.validateWith(emptyEmailValidator))
-        isValid = isValid and (passwordEditText.validateWith(emptyPasswordValidator))
+        passwordEditText?.let {
+            isValid = isValid and (it.validateWith(emptyPasswordValidator))
+        }
 
         return isValid
     }

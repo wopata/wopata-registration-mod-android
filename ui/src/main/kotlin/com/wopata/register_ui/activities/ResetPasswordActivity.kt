@@ -16,7 +16,6 @@ import com.wopata.register_ui.R
 class ResetPasswordActivity : AbstractRegisterActivity() {
 
     private val resetButton: Button by bindView(R.id.reset_button)
-    private val resetEditText: MaterialEditText by bindView(R.id.reset_password_edittext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +23,10 @@ class ResetPasswordActivity : AbstractRegisterActivity() {
         toolbar.title = getString(R.string.ResetTitle)
 
         resetButton.setOnClickListener {
-            signUp()
+            reset()
         }
-        resetEditText.setOnEditorActionListener { _, _, _ ->
-            signUp()
+        usernameEditText.setOnEditorActionListener { _, _, _ ->
+            reset()
             true
         }
     }
@@ -36,19 +35,19 @@ class ResetPasswordActivity : AbstractRegisterActivity() {
         return R.layout.activity_reset_password
     }
 
-    private fun signUp() {
+    private fun reset() {
         if (checkFields()) {
             val dialog = showWaitingDialog()
 
-            RegisterManager.signUp(
-                    user = User(username = usernameEditText.text.toString(), password = passwordEditText.text.toString(), token = null, source = UserSource.NATIVE),
+            RegisterManager.reset(
+                    user = User(username = usernameEditText.text.toString(), password = null, token = null, source = UserSource.NATIVE),
                     success = {
-                        Toast.makeText(this, "Sign up success", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Reset password success", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                         finish()
                     },
                     failure = {
-                        Toast.makeText(this, "Sign up failure", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Reset password failure", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     })
         }

@@ -28,7 +28,7 @@ class SignInActivity : AbstractRegisterActivity() {
         signInButton.setOnClickListener {
             signIn()
         }
-        passwordEditText.setOnEditorActionListener { _, _, _ ->
+        passwordEditText?.setOnEditorActionListener { _, _, _ ->
             signIn()
             true
         }
@@ -49,7 +49,7 @@ class SignInActivity : AbstractRegisterActivity() {
             val dialog = showWaitingDialog()
 
             RegisterManager.signIn(
-                    user = User(username = usernameEditText.text.toString(), password = passwordEditText.text.toString(), token = null, source = UserSource.NATIVE),
+                    user = User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), token = null, source = UserSource.NATIVE),
                     success = {
                         Toast.makeText(this, "Sign in success", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()

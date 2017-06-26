@@ -11,6 +11,10 @@ import com.wopata.register_ui.activities.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val TIME_OUT = 2000L
+    }
+
     private val registerButton: Button by bindView(R.id.register_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,14 +27,21 @@ class MainActivity : AppCompatActivity() {
                     val handler = Handler()
                     handler.postDelayed({
                         success()
-                    }, 2000)
+                    }, TIME_OUT)
                 },
                 signUpBlock = { user, success, failure ->
                     // TODO : DO YOUR SIGN UP LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
                     val handler = Handler()
                     handler.postDelayed({
                         success()
-                    }, 2000)
+                    }, TIME_OUT)
+                },
+                resetBlock = { user, success, failure ->
+                    // TODO : DO YOUR RESET PASSWORD LOGIC HERE THEN YIELD SUCCESS AND FAILURE BLOCKS
+                    val handler = Handler()
+                    handler.postDelayed({
+                        success()
+                    }, TIME_OUT)
                 }
         )
 
