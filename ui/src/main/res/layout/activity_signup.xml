@@ -1,53 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/sign_up_signin_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/register_screen_spacing"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/register_standard_spacing">
 
-        <ImageView
-            android:id="@+id/login_logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@android:color/black" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_username_edittext"
-            style="@style/MaterialEditText"
-            android:hint="login"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:nextFocusForward="@+id/login_password_edittext" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_password_edittext"
-            style="@style/MaterialEditText"
-            android:layout_marginTop="@dimen/register_standard_spacing"
-            android:hint="password"
-            android:imeOptions="actionNext"
-            android:inputType="textPassword"
-            android:nextFocusForward="@+id/login_password_confirmation_edittext" />
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/login_password_confirmation_edittext"
-            style="@style/MaterialEditText"
-            android:layout_marginTop="@dimen/register_standard_spacing"
-            android:hint="password confirm"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/login_sign_up_button"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/register_standard_spacing"
-            android:text="Login" />
+            android:text="@string/SignupWithAccount"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/sign_up_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/register_small_spacing"
+            android:text="@string/SignupConnect"
+            android:textColor="@color/register_accent_color"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
-</ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/sign_up_signin_container"
+        android:background="@color/register_background_color"
+        android:clipToPadding="false"
+        android:padding="@dimen/register_screen_spacing">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/login_username_edittext"
+                style="@style/MaterialEditText"
+                android:hint="@string/EmailAddress"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:nextFocusForward="@+id/login_password_edittext" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/login_password_edittext"
+                style="@style/MaterialEditText"
+                android:layout_marginTop="@dimen/register_standard_spacing"
+                android:hint="@string/Password"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/sign_up_button"
+                style="@style/RegisterButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/register_screen_spacing"
+                android:text="@string/SignupButtonTitle" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

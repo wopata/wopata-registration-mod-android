@@ -1,11 +1,10 @@
 package com.wopata.register_ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import butterknife.bindView
+import com.rengwuxian.materialedittext.MaterialEditText
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.User
 import com.wopata.register_core.models.UserSource
@@ -14,30 +13,27 @@ import com.wopata.register_ui.R
 /**
  * Created by stephenvinouze on 31/05/2017.
  */
-class SignUpActivity : AbstractRegisterActivity() {
+class ResetPasswordActivity : AbstractRegisterActivity() {
 
-    private val signUpButton: Button by bindView(R.id.sign_up_button)
-    private val signInButton: TextView by bindView(R.id.sign_up_sign_in_button)
+    private val resetButton: Button by bindView(R.id.reset_button)
+    private val resetEditText: MaterialEditText by bindView(R.id.reset_password_edittext)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        toolbar.title = getString(R.string.SignUpTitle)
+        toolbar.title = getString(R.string.ResetTitle)
 
-        signUpButton.setOnClickListener {
+        resetButton.setOnClickListener {
             signUp()
         }
-        passwordEditText.setOnEditorActionListener { _, _, _ ->
+        resetEditText.setOnEditorActionListener { _, _, _ ->
             signUp()
             true
-        }
-        signInButton.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
         }
     }
 
     override fun getContentLayout(): Int {
-        return R.layout.activity_signup
+        return R.layout.activity_reset_password
     }
 
     private fun signUp() {

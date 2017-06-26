@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">ui</string>
+<!-- AUTO-GENERATED -->
+<!-- Commons -->
+<string name="OR">Ou</string>
+<!-- Login Landing -->
+<string name="LandingCTAText">Commencer</string>
+<!-- Sign In -->
+<string name="SignInTitle">Se connecter</string>
+<string name="LoginWithGoogle">Se connecter avec Google</string>
+<string name="LoginWithFacebook">Se connecter avec Facebook</string>
+<string name="EmailAddress">Adresse email</string>
+<string name="Password">Mot de passe</string>
+<string name="LoginButtonTitle">Se connecter</string>
+<string name="LoginResetTitle">Mot de passe oublié ?</string>
+<string name="LoginNoAccount">Pas encore de compte ?</string>
+<string name="LoginRegister">Inscription</string>
+<!-- Sign Up -->
+<string name="SignUpTitle">S\'inscrire</string>
+<string name="SignupWithGoogle">Se connecter avec Google</string>
+<string name="SignupWithFacebook">Se connecter avec Facebook</string>
+<string name="SignupButtonTitle">S\'inscrire</string>
+<string name="SignupWithAccount">Déjà un compte ?</string>
+<string name="SignupConnect">Connexion</string>
+<!-- ResetPassword -->
+<string name="ResetTitle">Réinitialisation</string>
+<string name="ResetButtonTitle">Réinitialiser</string>
+<!-- Errors -->
+<string name="ErrorEmailEmpty">L\'email ne doit pas être vide</string>
+<string name="ErrorEmailInvalid">L\'email est invalide</string>
+<string name="ErrorPasswordEmpty">Le mot de passe ne doit pas être vide</string>
 </resources>

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.wopata.register_core.BuildConfig
-import com.wopata.register_core.models.CustomUser
+import com.wopata.register_core.models.User
 
 /**
  * Created by stephenvinouze on 14/06/2017.
@@ -16,11 +16,11 @@ object UserPreferences {
 
     private val gson: Gson by lazy { Gson() }
 
-    fun read(context: Context): CustomUser {
-        return gson.fromJson(getPreferences(context).getString(USER_KEY, null), CustomUser::class.java)
+    fun read(context: Context): User {
+        return gson.fromJson(getPreferences(context).getString(USER_KEY, null), User::class.java)
     }
 
-    fun write(context: Context, user: CustomUser) {
+    fun write(context: Context, user: User) {
         getPreferences(context).edit().putString(USER_KEY, gson.toJson(user)).apply()
     }
 

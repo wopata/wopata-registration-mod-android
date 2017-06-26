@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/login_signup_container"
+        android:id="@+id/sign_in_signup_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -12,21 +12,20 @@
         android:elevation="10dp"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/register_bottom_spacing">
+        android:padding="@dimen/register_standard_spacing">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pas encore de compte ?"
+            android:text="@string/LoginNoAccount"
             android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/login_sign_up"
+            android:id="@+id/sign_in_sign_up_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/register_small_spacing"
-            android:layout_marginStart="@dimen/register_small_spacing"
-            android:text="Inscription"
+            android:padding="@dimen/register_small_spacing"
+            android:text="@string/LoginRegister"
             android:textColor="@color/register_accent_color"
             android:textStyle="bold" />
 
@@ -35,7 +34,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/login_signup_container"
+        android:layout_above="@id/sign_in_signup_container"
         android:background="@color/register_background_color"
         android:clipToPadding="false"
         android:padding="@dimen/register_screen_spacing">
@@ -49,7 +48,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/login_username_edittext"
                 style="@style/MaterialEditText"
-                android:hint="login"
+                android:hint="@string/EmailAddress"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:nextFocusForward="@+id/login_password_edittext" />
@@ -58,24 +57,24 @@
                 android:id="@+id/login_password_edittext"
                 style="@style/MaterialEditText"
                 android:layout_marginTop="@dimen/register_standard_spacing"
-                android:hint="password"
+                android:hint="@string/Password"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/login_sign_in_button"
+                android:id="@+id/sign_in_button"
                 style="@style/RegisterButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_standard_spacing"
-                android:text="Login" />
+                android:layout_marginTop="@dimen/register_screen_spacing"
+                android:text="@string/LoginButtonTitle" />
 
             <TextView
-                android:id="@+id/login_forgot_button"
+                android:id="@+id/sign_in_forgot_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/register_standard_spacing"
-                android:text="Mot de passe oublié ?"
+                android:text="@string/LoginResetTitle"
                 android:textColor="@color/register_secondary_text_color" />
 
         </LinearLayout>

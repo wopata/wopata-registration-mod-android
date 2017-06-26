@@ -1,0 +1,22 @@
+{
+  "name": "register",
+  "version": "1.0.0",
+  "description": "",
+  "main": "update_strings.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+   "localize-with-spreadsheet": "git://github.com/aardouin/localize-with-spreadsheet#1.1"
+ },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wopata/wopata-registration-mod-android.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wopata/wopata-registration-mod-android/issues"
+  },
+  "homepage": "https://github.com/wopata/wopata-registration-mod-android#readme"
+}

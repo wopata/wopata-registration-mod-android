@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
-import com.wopata.register_ui.activities.LoginActivity
+import com.wopata.register_ui.activities.SignInActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 }
         )
 
-        registerButton.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
+        registerButton.setOnClickListener { startActivity(Intent(this, SignInActivity::class.java)) }
     }
 
 }
