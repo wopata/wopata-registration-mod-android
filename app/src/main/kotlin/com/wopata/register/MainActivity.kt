@@ -4,12 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import butterknife.bindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
-import com.wopata.register_ui.activities.SignInActivity
+import com.wopata.register_ui.activities.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,40 +24,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RegisterManager.initialize(
-                signInBlock = { activity, user ->
-                    val dialog = showWaitingDialog(activity)
-                    val handler = Handler()
-                    handler.postDelayed({
-                        dialog.dismiss()
-                        RegisterManager.finish(this, MainActivity::class)
-                    }, TIME_OUT)
-                },
-                signUpBlock = { activity, user ->
-                    val dialog = showWaitingDialog(activity)
-                    val handler = Handler()
-                    handler.postDelayed({
-                        dialog.dismiss()
-                        RegisterManager.finish(this, MainActivity::class)
-                    }, TIME_OUT)
-                },
-                resetBlock = { activity, user ->
-                    val dialog = showWaitingDialog(activity)
-                    val handler = Handler()
-                    handler.postDelayed({
-                        dialog.dismiss()
-                        RegisterManager.finish(this, MainActivity::class)
-                    }, TIME_OUT)
-                }
-        )
+        RegisterManager.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
+        RegisterManager.landingText = "This is a text that can be changed is it pleases you"
 
-        registerButton.setOnClickListener { startActivity(Intent(this, SignInActivity::class.java)) }
+        RegisterManager.signInBlock = { activity, user ->
+            validateRegistration(activity)
+        }
+        RegisterManager.signUpBlock = { activity, user ->
+            validateRegistration(activity)
+        }
+        RegisterManager.resetBlock = { activity, user ->
+            validateRegistration(activity)
+        }
+
+        registerButton.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
     }
 
     private fun showWaitingDialog(activity: Activity): MaterialDialog {
         return MaterialDialog.Builder(activity)
                 .progress(true, 0)
                 .show()
+    }
+
+    private fun validateRegistration(activity: Activity) {
+        val dialog = showWaitingDialog(activity)
+        val handler = Handler()
+        handler.postDelayed({
+            dialog.dismiss()
+            RegisterManager.finish(this)
+        }, TIME_OUT)
     }
 
 }
