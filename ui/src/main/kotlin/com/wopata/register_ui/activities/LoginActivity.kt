@@ -3,11 +3,13 @@ package com.wopata.register_ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.bindView
 import com.wopata.register_ui.R
+import com.wopata.register_ui.extensions.afterMeasured
 import com.wopata.register_ui.managers.ConfigurationManager
 
 /**
@@ -36,6 +38,12 @@ class LoginActivity : AppCompatActivity() {
         startButton.setTextColor(configuration.ctaTextColor)
         startButton.background = configuration.ctaBackground
         startButton.typeface = configuration.ctaTextFont
+
+        brandImageView.afterMeasured {
+            val params = brandImageView.layoutParams as ViewGroup.MarginLayoutParams
+            params.topMargin = configuration.landingBrandMargin
+            brandImageView.layoutParams = params
+        }
     }
 
 }
