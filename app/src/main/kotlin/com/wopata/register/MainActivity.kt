@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         RegisterManager.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
-        RegisterManager.landingText = "This is a text that can be changed is it pleases you"
+        RegisterManager.landingText = "This is a text that can be changed as it pleases you"
 
         RegisterManager.signInBlock = { activity, user ->
             validateRegistration(activity)

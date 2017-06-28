@@ -16,6 +16,8 @@ object RegisterManager {
     var landingBrand: Drawable? = null
     var landingText: String? = null
 
+    var ctaColor: Int? = null
+
     var signInBlock: ((activity: Activity, user: User) -> Unit)? =  null
     var signUpBlock: ((activity: Activity, user: User) -> Unit)? =  null
     var resetBlock: ((activity: Activity, user: User) -> Unit)? =  null
