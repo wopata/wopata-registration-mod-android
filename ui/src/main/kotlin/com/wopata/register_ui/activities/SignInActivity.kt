@@ -17,7 +17,7 @@ class SignInActivity : AbstractRegisterActivity() {
 
     private val signInButton: Button by bindView(R.id.sign_in_button)
     private val signUpButton: TextView by bindView(R.id.sign_in_sign_up_button)
-    private val requestPasswordButton: TextView by bindView(R.id.sign_in_forgot_button)
+    private val resetPasswordButton: TextView by bindView(R.id.sign_in_reset_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +31,7 @@ class SignInActivity : AbstractRegisterActivity() {
             signIn()
             true
         }
-        requestPasswordButton.setOnClickListener {
+        resetPasswordButton.setOnClickListener {
             startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
         signUpButton.setOnClickListener {

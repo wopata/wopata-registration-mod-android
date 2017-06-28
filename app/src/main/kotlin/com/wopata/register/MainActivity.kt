@@ -11,6 +11,7 @@ import butterknife.bindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_ui.activities.LoginActivity
+import com.wopata.register_ui.managers.ConfigurationManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,8 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        RegisterManager.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
-        RegisterManager.landingText = "This is a text that can be changed as it pleases you"
+        val configuration = ConfigurationManager.sharedInstance(this)
+        configuration.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
+        configuration.landingText = "Configurer ce texte pour attirer vos futurs clients"
 
         RegisterManager.signInBlock = { activity, user ->
             validateRegistration(activity)

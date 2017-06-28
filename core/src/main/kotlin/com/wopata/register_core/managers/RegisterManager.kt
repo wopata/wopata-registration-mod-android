@@ -3,7 +3,6 @@ package com.wopata.register_core.managers
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import com.wopata.register_core.models.User
 import com.wopata.register_core.preferences.UserPreferences
 
@@ -11,12 +10,6 @@ import com.wopata.register_core.preferences.UserPreferences
  * Created by stephenvinouze on 07/06/2017.
  */
 object RegisterManager {
-
-    var landingBackground: Drawable? = null
-    var landingBrand: Drawable? = null
-    var landingText: String? = null
-
-    var ctaColor: Int? = null
 
     var signInBlock: ((activity: Activity, user: User) -> Unit)? =  null
     var signUpBlock: ((activity: Activity, user: User) -> Unit)? =  null

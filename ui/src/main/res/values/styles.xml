@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/register_accent_color</item>
     </style>
 
-    <style name="LoginTheme" parent="RegisterTheme"/>
+    <style name="LoginTheme" parent="RegisterTheme" />
 
     <style name="MaterialEditText">
         <item name="android:layout_width">match_parent</item>
@@ -25,6 +25,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:elevation">5dp</item>
     </style>
 
 </resources>

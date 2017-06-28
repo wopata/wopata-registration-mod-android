@@ -7,8 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import butterknife.bindView
-import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_ui.R
+import com.wopata.register_ui.managers.ConfigurationManager
 
 /**
  * Created by stephenvinouze on 31/05/2017.
@@ -28,9 +28,14 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignInActivity::class.java))
         }
 
-        brandbackgroundView.setImageDrawable(RegisterManager.landingBackground)
-        brandImageView.setImageDrawable(RegisterManager.landingBrand)
-        textView.text = RegisterManager.landingText
+        val configuration = ConfigurationManager.sharedInstance(this)
+        brandbackgroundView.setImageDrawable(configuration.landingBackground)
+        brandImageView.setImageDrawable(configuration.landingBrand)
+        textView.text = configuration.landingText
+        textView.typeface = configuration.landingTextFont
+        startButton.setTextColor(configuration.ctaTextColor)
+        startButton.background = configuration.ctaBackground
+        startButton.typeface = configuration.ctaTextFont
     }
 
 }
