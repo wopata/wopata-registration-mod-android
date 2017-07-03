@@ -40,4 +40,6 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
     compile "com.android.support:appcompat-v7:$appcompat_version"
+
+    compile 'com.afollestad.material-dialogs:core:0.9.4.5'
 }
