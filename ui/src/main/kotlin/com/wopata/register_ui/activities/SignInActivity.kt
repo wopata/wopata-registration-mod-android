@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.TextView
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
+import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_core.models.User
-import com.wopata.register_core.models.UserSource
 import com.wopata.register_ui.R
 
 /**
@@ -45,7 +45,7 @@ class SignInActivity : AbstractRegisterActivity() {
 
     private fun signIn() {
         if (checkFields()) {
-            RegisterManager.signIn(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), token = null, source = UserSource.NATIVE))
+            RegisterManager.signInBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
         }
     }
 

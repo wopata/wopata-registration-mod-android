@@ -7,9 +7,12 @@ import android.os.Handler
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
+import android.widget.TextView
 import butterknife.bindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
+import com.wopata.register_core.models.RegisterSource
+import com.wopata.register_core.models.User
 import com.wopata.register_ui.activities.LoginActivity
 import com.wopata.register_ui.managers.ConfigurationManager
 
@@ -20,23 +23,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val registerButton: Button by bindView(R.id.register_button)
+    private val registerUser: TextView by bindView(R.id.register_user)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val configuration = ConfigurationManager.sharedInstance(this)
+        configuration.sources = arrayOf(RegisterSource.NATIVE, RegisterSource.FACEBOOK, RegisterSource.GOOGLE)
         configuration.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
         configuration.landingText = "Configurer ce texte pour attirer vos futurs clients"
 
         RegisterManager.signInBlock = { activity, user ->
-            validateRegistration(activity)
+            registerUser.text = user.toString()
+            validateRegistration(activity, user)
         }
         RegisterManager.signUpBlock = { activity, user ->
-            validateRegistration(activity)
+            registerUser.text = user.toString()
+            validateRegistration(activity, user)
         }
         RegisterManager.resetBlock = { activity, user ->
-            validateRegistration(activity)
+            validateRegistration(activity, user)
         }
 
         registerButton.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
@@ -48,13 +55,17 @@ class MainActivity : AppCompatActivity() {
                 .show()
     }
 
-    private fun validateRegistration(activity: Activity) {
-        val dialog = showWaitingDialog(activity)
-        val handler = Handler()
-        handler.postDelayed({
-            dialog.dismiss()
+    private fun validateRegistration(activity: Activity, user: User) {
+        if (user.source == RegisterSource.NATIVE) {
+            val dialog = showWaitingDialog(activity)
+            val handler = Handler()
+            handler.postDelayed({
+                dialog.dismiss()
+                RegisterManager.finish(this)
+            }, TIME_OUT)
+        } else {
             RegisterManager.finish(this)
-        }, TIME_OUT)
+        }
     }
 
 }

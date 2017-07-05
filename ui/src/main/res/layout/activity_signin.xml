@@ -49,11 +49,29 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
+            <Button
+                android:id="@+id/register_google"
+                style="@style/RegisterButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:text="Google" />
+
+            <Button
+                android:id="@+id/register_facebook"
+                style="@style/RegisterButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/register_standard_spacing"
+                android:elevation="5dp"
+                android:text="Facebook" />
+
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/login_username_edittext"
                 style="@style/MaterialEditText"
                 android:hint="@string/EmailAddress"
                 android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/register_standard_spacing"
                 android:inputType="textEmailAddress"
                 android:nextFocusForward="@+id/login_password_edittext" />
 

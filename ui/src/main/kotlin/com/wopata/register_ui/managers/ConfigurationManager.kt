@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
+import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_ui.R
 
 /**
@@ -21,6 +22,8 @@ class ConfigurationManager private constructor(context: Context) {
             return instance!!
         }
     }
+
+    var sources: Array<RegisterSource> = arrayOf(RegisterSource.NATIVE)
 
     var landingBackground: Drawable? = null
     var landingBrand: Drawable? = null

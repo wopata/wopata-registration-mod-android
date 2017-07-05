@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Button
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
+import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_core.models.User
-import com.wopata.register_core.models.UserSource
 import com.wopata.register_ui.R
 
 /**
@@ -35,7 +35,7 @@ class ResetPasswordActivity : AbstractRegisterActivity() {
 
     private fun reset() {
         if (checkFields()) {
-            RegisterManager.reset(this, User(username = usernameEditText.text.toString(), password = null, token = null, source = UserSource.NATIVE))
+            RegisterManager.resetBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = null, token = null, source = RegisterSource.NATIVE))
         }
     }
 

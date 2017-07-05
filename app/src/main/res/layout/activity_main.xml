@@ -10,4 +10,13 @@
         android:layout_centerInParent="true"
         android:text="Start register" />
 
+    <TextView
+        android:id="@+id/register_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/register_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:padding="20dp" />
+
 </RelativeLayout>

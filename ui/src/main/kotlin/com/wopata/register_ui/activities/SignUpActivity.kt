@@ -1,13 +1,12 @@
 package com.wopata.register_ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
+import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_core.models.User
-import com.wopata.register_core.models.UserSource
 import com.wopata.register_ui.R
 
 /**
@@ -31,7 +30,7 @@ class SignUpActivity : AbstractRegisterActivity() {
             true
         }
         signInButton.setOnClickListener {
-            startActivity(Intent(this, SignInActivity::class.java))
+            finish()
         }
     }
 
@@ -41,7 +40,7 @@ class SignUpActivity : AbstractRegisterActivity() {
 
     private fun signUp() {
         if (checkFields()) {
-            RegisterManager.signUp(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), token = null, source = UserSource.NATIVE))
+            RegisterManager.signUpBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
         }
     }
 
