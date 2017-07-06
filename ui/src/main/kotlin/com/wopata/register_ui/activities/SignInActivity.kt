@@ -45,7 +45,7 @@ class SignInActivity : AbstractRegisterActivity() {
 
     private fun signIn() {
         if (checkFields()) {
-            RegisterManager.signInBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
+            RegisterManager.signIn?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
         }
     }
 

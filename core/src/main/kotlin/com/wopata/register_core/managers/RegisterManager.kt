@@ -23,52 +23,59 @@ object RegisterManager {
     private const val REQUEST_GOOGLE_REGISTER = 1
 
     var facebookPermissions: List<String> = arrayListOf("public_profile")
-    var signInBlock: ((activity: Activity, user: User) -> Unit)? =  null
-    var signUpBlock: ((activity: Activity, user: User) -> Unit)? =  null
-    var resetBlock: ((activity: Activity, user: User) -> Unit)? =  null
+    var googleIdToken: String? = null
+    var signIn: ((activity: Activity, user: User) -> Unit)? =  null
+    var signUp: ((activity: Activity, user: User) -> Unit)? =  null
+    var reset: ((activity: Activity, user: User) -> Unit)? =  null
 
     private val callbackManager: CallbackManager = CallbackManager.Factory.create()
-    private var activity: Activity? = null
 
     fun login(activity: FragmentActivity, source: RegisterSource) {
-        this.activity = activity
         when (source) {
-            RegisterSource.NATIVE -> throw IllegalStateException("Use your signIn/signUp blocks to handle your registration for NATIVE source")
+            RegisterSource.NATIVE -> throw IllegalStateException("Use your signIn/signUp methods to handle your registration for NATIVE source")
             RegisterSource.FACEBOOK -> {
-                LoginManager.getInstance().registerCallback(callbackManager,
-                        object : FacebookCallback<LoginResult> {
-                            override fun onSuccess(loginResult: LoginResult) {
-                                RegisterManager.signInBlock?.invoke(activity, User(token = loginResult.accessToken.token, source = RegisterSource.FACEBOOK))
-                            }
+                if (facebookPermissions.isNotEmpty()) {
+                    LoginManager.getInstance().registerCallback(callbackManager,
+                            object : FacebookCallback<LoginResult> {
+                                override fun onSuccess(loginResult: LoginResult) {
+                                    RegisterManager.signIn?.invoke(activity, User(token = loginResult.accessToken.token, source = RegisterSource.FACEBOOK))
+                                }
 
-                            override fun onCancel() {}
+                                override fun onCancel() {}
 
-                            override fun onError(exception: FacebookException) {}
-                        })
-                LoginManager.getInstance().logInWithReadPermissions(activity, facebookPermissions)
+                                override fun onError(exception: FacebookException) {}
+                            })
+                    LoginManager.getInstance().logInWithReadPermissions(activity, facebookPermissions)
+                } else {
+                    throw IllegalStateException("At least one permission is required to connect with Facebook")
+                }
             }
             RegisterSource.GOOGLE -> {
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken("879551982001-v9m6vgoj5dak0sb2tprbv72mcnjpfiju.apps.googleusercontent.com")
-                        .build()
+                if (googleIdToken != null) {
+                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(googleIdToken)
+                            .build()
 
-                val googleApiClient = GoogleApiClient.Builder(activity)
-                        .enableAutoManage(activity, null)
-                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                        .build()
+                    val googleApiClient = GoogleApiClient.Builder(activity)
+                            .enableAutoManage(activity, null)
+                            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                            .build()
 
-                val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
-                activity.startActivityForResult(signInIntent, REQUEST_GOOGLE_REGISTER)
+                    val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+                    activity.startActivityForResult(signInIntent, REQUEST_GOOGLE_REGISTER)
+                } else {
+                    throw IllegalStateException("GoogleIdToken is required to connect with Google")
+                }
             }
         }
     }
 
-    fun handleResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+    fun handleResult(activity: Activity, requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         when (requestCode) {
             REQUEST_GOOGLE_REGISTER -> {
                 val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
                 if (result.isSuccess) {
-                    RegisterManager.signInBlock?.invoke(activity!!, User(token = result.signInAccount?.idToken, source = RegisterSource.GOOGLE))
+                    RegisterManager.signIn?.invoke(activity, User(token = result.signInAccount?.idToken, source = RegisterSource.GOOGLE))
                 }
                 return result.isSuccess
             }

@@ -27,7 +27,6 @@ import com.wopata.register_ui.R
 import com.wopata.register_ui.managers.ConfigurationManager
 import java.util.regex.Pattern
 
-
 /**
  * Created by stephenvinouze on 07/06/2017.
  */
@@ -123,7 +122,7 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        RegisterManager.handleResult(requestCode, resultCode, data)
+        RegisterManager.handleResult(this, requestCode, resultCode, data)
     }
 
 }

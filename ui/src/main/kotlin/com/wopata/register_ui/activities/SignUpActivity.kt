@@ -40,7 +40,7 @@ class SignUpActivity : AbstractRegisterActivity() {
 
     private fun signUp() {
         if (checkFields()) {
-            RegisterManager.signUpBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
+            RegisterManager.signUp?.invoke(this, User(username = usernameEditText.text.toString(), password = passwordEditText?.text.toString(), source = RegisterSource.NATIVE))
         }
     }
 

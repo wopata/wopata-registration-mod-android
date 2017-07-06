@@ -32,17 +32,18 @@ class MainActivity : AppCompatActivity() {
         val configuration = ConfigurationManager.sharedInstance(this)
         configuration.sources = arrayOf(RegisterSource.NATIVE, RegisterSource.FACEBOOK, RegisterSource.GOOGLE)
         configuration.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
-        configuration.landingText = "Configure this text to expose why your user should create an account"
+        configuration.landingText = getString(R.string.landing_text)
 
-        RegisterManager.signInBlock = { activity, user ->
+        RegisterManager.googleIdToken = getString(R.string.google_token_id)
+        RegisterManager.signIn = { activity, user ->
             registerUser.text = user.toString()
             validateRegistration(activity, user)
         }
-        RegisterManager.signUpBlock = { activity, user ->
+        RegisterManager.signUp = { activity, user ->
             registerUser.text = user.toString()
             validateRegistration(activity, user)
         }
-        RegisterManager.resetBlock = { activity, user ->
+        RegisterManager.reset = { activity, user ->
             validateRegistration(activity, user)
         }
 

@@ -35,7 +35,7 @@ class ResetPasswordActivity : AbstractRegisterActivity() {
 
     private fun reset() {
         if (checkFields()) {
-            RegisterManager.resetBlock?.invoke(this, User(username = usernameEditText.text.toString(), password = null, token = null, source = RegisterSource.NATIVE))
+            RegisterManager.reset?.invoke(this, User(username = usernameEditText.text.toString(), password = null, token = null, source = RegisterSource.NATIVE))
         }
     }
 
