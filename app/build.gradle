@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 25
@@ -42,4 +43,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$appcompat_version"
 
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
+    compile 'com.google.android.gms:play-services-auth:11.0.2'
 }
+
+apply plugin: 'com.google.gms.google-services'

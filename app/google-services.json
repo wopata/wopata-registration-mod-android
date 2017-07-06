@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "879551982001",
+    "project_id": "wopatatestapplication"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879551982001:android:fea6baa4fbdcd8e8",
+        "android_client_info": {
+          "package_name": "com.wopata.register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879551982001-ks6cc8u4f5i8mk11nffi0u2afqc02763.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wopata.register",
+            "certificate_hash": "c6c6b0bf92e49ece7881bd160a6b84a6695f5c7e"
+          }
+        },
+        {
+          "client_id": "879551982001-v9m6vgoj5dak0sb2tprbv72mcnjpfiju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVDTF82QUBMFMYloeDm4OI6zIk2yc5ATw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,6 +17,10 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
 import com.wopata.register_core.managers.RegisterManager
@@ -25,10 +29,15 @@ import com.wopata.register_core.models.User
 import com.wopata.register_ui.R
 import com.wopata.register_ui.managers.ConfigurationManager
 
+
 /**
  * Created by stephenvinouze on 07/06/2017.
  */
-abstract class AbstractRegisterActivity : AppCompatActivity() {
+abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
+
+    companion object {
+        private const val REQUEST_GOOGLE_REGISTER = 1
+    }
 
     protected val toolbar: Toolbar by bindView(R.id.register_toolbar)
     protected val usernameEditText: MaterialEditText by bindView(R.id.login_username_edittext)
@@ -38,6 +47,16 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
     private val container: FrameLayout by bindView(R.id.register_activity_container)
 
     private val callbackManager: CallbackManager = CallbackManager.Factory.create()
+    private val googleApiClient: GoogleApiClient by lazy {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("879551982001-v9m6vgoj5dak0sb2tprbv72mcnjpfiju.apps.googleusercontent.com")
+                .build()
+
+        GoogleApiClient.Builder(this)
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +86,8 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
             LoginManager.getInstance().logInWithReadPermissions(this, RegisterManager.facebookPermissions)
         }
         googleButton?.setOnClickListener {
-            TODO()
+            val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+            startActivityForResult(signInIntent, REQUEST_GOOGLE_REGISTER)
         }
     }
 
@@ -100,9 +120,19 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
         return isValid
     }
 
+    override fun onConnectionFailed(p0: ConnectionResult) {}
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            REQUEST_GOOGLE_REGISTER -> {
+                val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
+                if (result.isSuccess) {
+                    RegisterManager.signInBlock?.invoke(this@AbstractRegisterActivity, User(token = result.signInAccount?.idToken, source = RegisterSource.GOOGLE))
+                }
+            }
+            else -> callbackManager.onActivityResult(requestCode, resultCode, data)
+        }
     }
 
 }
