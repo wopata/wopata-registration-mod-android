@@ -32,7 +32,7 @@ Then add the following dependency in your project.
 def register_version = "1.0.0"
 
 dependencies {
-  compile "com.github.wopata.wopata-registration-mod-android:core:$register_version"
+  	compile "com.github.wopata.wopata-registration-mod-android:core:$register_version"
 
 	// or if you want the already integrated workflow with designed screens, rather use the following dependency
 	compile "com.github.wopata.wopata-registration-mod-android:ui:$register_version"
@@ -131,6 +131,7 @@ Create or select your Facebook application on [Facebook for developer](https://d
 	</activity>
 
 </application>
+```
 
 By default, the Facebook connect asks for the `public_profile` permission but this can be changed using :
 
