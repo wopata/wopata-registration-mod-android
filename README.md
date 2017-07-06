@@ -45,27 +45,27 @@ Assuming that you want the whole package, you will need to indicate how your app
 
 ```kotlin
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.<your_layout>)
+override fun onCreate(savedInstanceState: Bundle?) {
+	super.onCreate(savedInstanceState)
+	setContentView(R.layout.<your_layout>)
 
-        RegisterManager.signIn = { activity, user ->
-            // request sign in to server by sending provided user
-        }
-        RegisterManager.signUp = { activity, user ->
-            // request sign up to server by sending provided user
-        }
-        RegisterManager.reset = { activity, user ->
-            // request password to server
-        }
-    }
+	RegisterManager.signIn = { activity, user ->
+	    // request sign in to server by sending provided user
+	}
+	RegisterManager.signUp = { activity, user ->
+	    // request sign up to server by sending provided user
+	}
+	RegisterManager.reset = { activity, user ->
+	    // request password to server
+	}
+}
 
 ```
 
 To start the registration workflow, call the `LoginActivity` :
 
 ```kotlin
-	startActivity(Intent(this, LoginActivity::class.java))
+startActivity(Intent(this, LoginActivity::class.java))
 ```
 
 ## Customization
@@ -73,22 +73,22 @@ To start the registration workflow, call the `LoginActivity` :
 Although this library is rather limited in terms of customization (this is expected as we want to provide a workflow "as is" and let you implement a registration process in no time) you can still customize a few parameters, especially on the landing screen that you can see while starting the registration workflow using the `ConfigurationManager` :
 
 ```kotlin
-	val configuration = ConfigurationManager.sharedInstance(this)
-	configuration.landingBackground = <your_drawable_in_full_page>
-	configuration.landingBrand = <your_logo>
-	configuration.landingBrandMargin = <your_logo_margins>
-	configuration.landingText = <your_text_to_attract_your_users_to_register>
-	configuration.landingTextFont = <your_font_for_your_text_to_attract_your_users_to_register>
-	configuration.ctaBackground = <your_call_to_action_background>
-	configuration.ctaTextColor = <your_call_to_action_text_color>
-	configuration.ctaTextFont = <your_call_to_action_text_font>
+val configuration = ConfigurationManager.sharedInstance(this)
+configuration.landingBackground = <your_drawable_in_full_page>
+configuration.landingBrand = <your_logo>
+configuration.landingBrandMargin = <your_logo_margins>
+configuration.landingText = <your_text_to_attract_your_users_to_register>
+configuration.landingTextFont = <your_font_for_your_text_to_attract_your_users_to_register>
+configuration.ctaBackground = <your_call_to_action_background>
+configuration.ctaTextColor = <your_call_to_action_text_color>
+configuration.ctaTextFont = <your_call_to_action_text_font>
 ```
 
 By default, all social connects are disabled, only native authentication is available. If you want to activate either Facebook or Google connect, add them to the configuration sources :
 
 ```kotlin
-	val configuration = ConfigurationManager.sharedInstance(this)
-	configuration.sources = arrayOf(RegisterSource.NATIVE, RegisterSource.FACEBOOK, RegisterSource.GOOGLE)
+val configuration = ConfigurationManager.sharedInstance(this)
+configuration.sources = arrayOf(RegisterSource.NATIVE, RegisterSource.FACEBOOK, RegisterSource.GOOGLE)
 ```
 
 ## Configure your application for Facebook
@@ -101,13 +101,13 @@ Create or select your Facebook application on [Facebook for developer](https://d
 <application ...>
 
 	 <activity
-			 android:name="com.facebook.FacebookActivity"
-			 android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-			 android:label="@string/app_name" />
+		android:name="com.facebook.FacebookActivity"
+		android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+		android:label="@string/app_name" />
 
 	 <meta-data
-			 android:name="com.facebook.sdk.ApplicationId"
-			 android:value="@string/facebook_app_id" />
+		android:name="com.facebook.sdk.ApplicationId"
+		android:value="@string/facebook_app_id" />
 
 </application>
 ```
@@ -121,12 +121,12 @@ Create or select your Facebook application on [Facebook for developer](https://d
 		 android:name="com.facebook.CustomTabActivity"
 		 android:exported="true">
 		 <intent-filter>
-				 <action android:name="android.intent.action.VIEW" />
+			<action android:name="android.intent.action.VIEW" />
 
-				 <category android:name="android.intent.category.DEFAULT" />
-				 <category android:name="android.intent.category.BROWSABLE" />
+			<category android:name="android.intent.category.DEFAULT" />
+			<category android:name="android.intent.category.BROWSABLE" />
 
-				 <data android:scheme="@string/fb_login_protocol_scheme" />
+			<data android:scheme="@string/fb_login_protocol_scheme" />
 		 </intent-filter>
 	</activity>
 
@@ -135,7 +135,7 @@ Create or select your Facebook application on [Facebook for developer](https://d
 By default, the Facebook connect asks for the `public_profile` permission but this can be changed using :
 
 ```kotlin
-	RegisterManager.facebookPermissions = arrayListOf("public_profile, email, etc.")
+RegisterManager.facebookPermissions = arrayListOf("public_profile, email, etc.")
 ```
 
 ## Configure your application for Google
@@ -148,8 +148,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-			...
-      classpath 'com.google.gms:google-services:3.1.0' // Add this
+    	...
+      	classpath 'com.google.gms:google-services:3.1.0' // Add this
     }
 }
 ```
@@ -172,7 +172,7 @@ Once you have setup your Google application, download your `google-services.json
 Finally, in order to retrieve your web token that can be safely shared to your own server, you must provide a `googleTokenId` that can be found inside your project in the developer console. The last section of this [document](https://android-developers.googleblog.com/2016/03/registering-oauth-clients-for-google.html) explains to you how to retrieve this web token. Indicate this token with the following lines :
 
 ```kotlin
-	RegisterManager.googleIdToken = <your_web_token>
+RegisterManager.googleIdToken = <your_web_token>
 ```
 
 ## Pull requests
