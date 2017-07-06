@@ -4,4 +4,7 @@
     <color name="register_accent_color">#4E92DF</color>
     <color name="register_background_color">#FAFAFA</color>
     <color name="register_secondary_text_color">#80000000</color>
+    <color name="register_separator_color">#26000000</color>
+    <color name="register_facebook_color">#3D5A96</color>
+    <color name="register_google_color">#FFFFFF</color>
 </resources>

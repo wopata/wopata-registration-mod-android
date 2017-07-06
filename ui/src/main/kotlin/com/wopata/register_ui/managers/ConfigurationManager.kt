@@ -31,7 +31,7 @@ class ConfigurationManager private constructor(context: Context) {
     var landingText: String? = null
     var landingTextFont: Typeface = Typeface.SANS_SERIF
 
-    var ctaBackground: Drawable = ContextCompat.getDrawable(context, R.drawable.button_background_colors)
+    var ctaBackground: Drawable = ContextCompat.getDrawable(context, R.drawable.bg_button_default)
     var ctaTextColor: Int = Color.WHITE
     var ctaTextFont: Typeface = Typeface.DEFAULT_BOLD
 }

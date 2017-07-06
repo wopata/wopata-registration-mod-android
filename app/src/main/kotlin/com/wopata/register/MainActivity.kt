@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val configuration = ConfigurationManager.sharedInstance(this)
         configuration.sources = arrayOf(RegisterSource.NATIVE, RegisterSource.FACEBOOK, RegisterSource.GOOGLE)
         configuration.landingBackground = ContextCompat.getDrawable(this, R.drawable.login_background)
-        configuration.landingText = "Configurer ce texte pour attirer vos futurs clients"
+        configuration.landingText = "Configure this text to expose why your user should create an account"
 
         RegisterManager.signInBlock = { activity, user ->
             registerUser.text = user.toString()

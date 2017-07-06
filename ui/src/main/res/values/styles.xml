@@ -20,11 +20,37 @@
         <item name="met_primaryColor">@color/register_accent_color</item>
     </style>
 
-    <style name="RegisterButton" parent="Base.TextAppearance.AppCompat.Button">
-        <item name="android:background">@drawable/button_background_colors</item>
+
+    <style name="Button.Base" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Button" parent="Button.Base"/>
+
+    <style name="RegisterButton" parent="Button">
+        <item name="android:background">@drawable/bg_button_default</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SocialButton" parent="Button">
+        <item name="android:paddingLeft">@dimen/register_standard_spacing</item>
+        <item name="android:paddingRight">@dimen/register_standard_spacing</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="FacebookButton" parent="SocialButton">
+        <item name="android:background">@drawable/bg_button_facebook</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="GoogleButton" parent="SocialButton">
+        <item name="android:background">@drawable/bg_button_google</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
 </resources>

@@ -68,29 +68,21 @@
             <Button
                 android:id="@+id/sign_up_button"
                 style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/register_standard_spacing"
                 android:layout_marginTop="@dimen/register_screen_spacing"
-                android:elevation="5dp"
                 android:text="@string/SignupButtonTitle" />
+
+            <include layout="@layout/view_separator" />
 
             <Button
                 android:id="@+id/register_google"
-                style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_standard_spacing"
-                android:elevation="5dp"
-                android:text="Google" />
+                style="@style/GoogleButton"
+                android:layout_marginTop="@dimen/register_standard_spacing" />
 
             <Button
                 android:id="@+id/register_facebook"
-                style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_standard_spacing"
-                android:elevation="5dp"
-                android:text="Facebook" />
+                style="@style/FacebookButton"
+                android:layout_marginTop="@dimen/register_standard_spacing" />
 
         </LinearLayout>
 

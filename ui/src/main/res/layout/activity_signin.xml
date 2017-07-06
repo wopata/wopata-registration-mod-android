@@ -51,27 +51,22 @@
 
             <Button
                 android:id="@+id/register_google"
-                style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="5dp"
-                android:text="Google" />
+                style="@style/GoogleButton" />
 
             <Button
                 android:id="@+id/register_facebook"
-                style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/register_standard_spacing"
-                android:elevation="5dp"
-                android:text="Facebook" />
+                style="@style/FacebookButton"
+                android:layout_marginBottom="@dimen/register_standard_spacing"
+                android:layout_marginTop="@dimen/register_standard_spacing" />
+
+            <include layout="@layout/view_separator" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/login_username_edittext"
                 style="@style/MaterialEditText"
+                android:layout_marginTop="@dimen/register_standard_spacing"
                 android:hint="@string/EmailAddress"
                 android:imeOptions="actionNext"
-                android:layout_marginTop="@dimen/register_standard_spacing"
                 android:inputType="textEmailAddress"
                 android:nextFocusForward="@+id/login_password_edittext" />
 
@@ -86,10 +81,7 @@
             <Button
                 android:id="@+id/sign_in_button"
                 style="@style/RegisterButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/register_screen_spacing"
-                android:elevation="5dp"
                 android:text="@string/LoginButtonTitle" />
 
             <TextView
