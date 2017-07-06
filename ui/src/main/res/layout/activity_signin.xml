@@ -64,7 +64,6 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/login_username_edittext"
                 style="@style/MaterialEditText"
-                android:layout_marginTop="@dimen/register_standard_spacing"
                 android:hint="@string/EmailAddress"
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"

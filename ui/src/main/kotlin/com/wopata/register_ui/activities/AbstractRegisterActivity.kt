@@ -19,20 +19,10 @@ import android.widget.Button
 import android.widget.FrameLayout
 import butterknife.bindOptionalView
 import butterknife.bindView
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.Auth
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.RegisterSource
-import com.wopata.register_core.models.User
 import com.wopata.register_ui.R
 import com.wopata.register_ui.managers.ConfigurationManager
 import java.util.regex.Pattern
@@ -41,11 +31,7 @@ import java.util.regex.Pattern
 /**
  * Created by stephenvinouze on 07/06/2017.
  */
-abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
-
-    companion object {
-        private const val REQUEST_GOOGLE_REGISTER = 1
-    }
+abstract class AbstractRegisterActivity : AppCompatActivity() {
 
     protected val toolbar: Toolbar by bindView(R.id.register_toolbar)
     protected val usernameEditText: MaterialEditText by bindView(R.id.login_username_edittext)
@@ -53,9 +39,6 @@ abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.O
     protected val facebookButton: Button? by bindOptionalView(R.id.register_facebook)
     protected val googleButton: Button? by bindOptionalView(R.id.register_google)
     private val container: FrameLayout by bindView(R.id.register_activity_container)
-
-    private var callbackManager: CallbackManager? = null
-    private var googleApiClient: GoogleApiClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,20 +55,8 @@ abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.O
             facebookButton?.visibility = View.VISIBLE
             configureSocialButton(facebookButton, getString(R.string.LoginWithFacebook), R.drawable.ic_facebook, "Facebook")
 
-            callbackManager = CallbackManager.Factory.create()
-            LoginManager.getInstance().registerCallback(callbackManager,
-                    object : FacebookCallback<LoginResult> {
-                        override fun onSuccess(loginResult: LoginResult) {
-                            RegisterManager.signInBlock?.invoke(this@AbstractRegisterActivity, User(token = loginResult.accessToken.token, source = RegisterSource.FACEBOOK))
-                        }
-
-                        override fun onCancel() {}
-
-                        override fun onError(exception: FacebookException) {}
-                    })
-
             facebookButton?.setOnClickListener {
-                LoginManager.getInstance().logInWithReadPermissions(this, RegisterManager.facebookPermissions)
+                RegisterManager.login(this, RegisterSource.FACEBOOK)
             }
         } else {
             facebookButton?.visibility = View.GONE
@@ -95,18 +66,8 @@ abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.O
             googleButton?.visibility = View.VISIBLE
             configureSocialButton(googleButton, getString(R.string.LoginWithGoogle), R.drawable.ic_google, "Google")
 
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("879551982001-v9m6vgoj5dak0sb2tprbv72mcnjpfiju.apps.googleusercontent.com")
-                    .build()
-
-            googleApiClient = GoogleApiClient.Builder(this)
-                    .enableAutoManage(this, this)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                    .build()
-
             googleButton?.setOnClickListener {
-                val signInIntent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
-                startActivityForResult(signInIntent, REQUEST_GOOGLE_REGISTER)
+                RegisterManager.login(this, RegisterSource.GOOGLE)
             }
         } else {
             googleButton?.visibility = View.GONE
@@ -160,19 +121,9 @@ abstract class AbstractRegisterActivity : AppCompatActivity(), GoogleApiClient.O
         button?.text = span
     }
 
-    override fun onConnectionFailed(p0: ConnectionResult) {}
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            REQUEST_GOOGLE_REGISTER -> {
-                val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)
-                if (result.isSuccess) {
-                    RegisterManager.signInBlock?.invoke(this@AbstractRegisterActivity, User(token = result.signInAccount?.idToken, source = RegisterSource.GOOGLE))
-                }
-            }
-            else -> callbackManager?.onActivityResult(requestCode, resultCode, data)
-        }
+        RegisterManager.handleResult(requestCode, resultCode, data)
     }
 
 }
