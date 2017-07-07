@@ -68,6 +68,12 @@ To start the registration workflow, call the `LoginActivity` :
 startActivity(Intent(this, LoginActivity::class.java))
 ```
 
+To come back to your activity once your user registers, you can call the `finish` method by giving it your calling activity to pop back to it and end all activities from the library :
+
+```kotlin
+RegisterManager.finish(this)
+```
+
 ## Customization
 
 Although this library is rather limited in terms of customization (this is expected as we want to provide a workflow "as is" and let you implement a registration process in no time) you can still customize a few parameters, especially on the landing screen that you can see while starting the registration workflow using the `ConfigurationManager` :
@@ -174,6 +180,31 @@ Finally, in order to retrieve your web token that can be safely shared to your o
 
 ```kotlin
 RegisterManager.googleIdToken = <your_web_token>
+```
+
+## Create your own register screen workflow
+
+You may want to create your own screens to manage your registration process. You can still use this library using the `core` module and let it handle either Facebook or Google connect.
+
+When you want to trigger such a connection, just call :
+
+```kotlin
+RegisterManager.login(this, RegisterSource.GOOGLE /* or RegisterSource.FACEBOOK */)
+```
+
+Note that an exception will be thrown whether :
+
+* you don't provide any permission for Facebook
+* you don't provide a web token for Google
+* you pass RegisterSource.NATIVE as source parameter as there is no value using this method as you will handle your own registration process.
+
+Finally you must override your calling activity's `onActivityResult` to propagate the social connect handling to the library :
+
+```kotlin
+override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    RegisterManager.handleResult(this, requestCode, resultCode, data)
+}
 ```
 
 ## Pull requests
