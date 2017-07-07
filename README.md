@@ -29,7 +29,7 @@ allprojects {
 Then add the following dependency in your project.
 
 ```groovy
-def register_version = "1.0.0"
+def register_version = "{latest_version}"
 
 dependencies {
   	compile "com.github.wopata.wopata-registration-mod-android:core:$register_version"
