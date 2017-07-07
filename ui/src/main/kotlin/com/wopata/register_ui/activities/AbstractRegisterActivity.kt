@@ -36,6 +36,7 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
     protected val toolbar: Toolbar by bindView(R.id.register_toolbar)
     protected val usernameEditText: MaterialEditText by bindView(R.id.login_username_edittext)
     protected val passwordEditText: MaterialEditText? by bindOptionalView(R.id.login_password_edittext)
+    protected val ctaButton: Button by bindView(R.id.register_cta_button)
     protected val facebookButton: Button? by bindOptionalView(R.id.register_facebook)
     protected val googleButton: Button? by bindOptionalView(R.id.register_google)
     protected val separator: ViewGroup? by bindOptionalView(R.id.register_separator)
@@ -50,7 +51,12 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val sources = ConfigurationManager.sharedInstance(this).sources
+        val configuration = ConfigurationManager.sharedInstance(this)
+        val sources = configuration.sources
+
+        ctaButton.setTextColor(configuration.ctaTextColor)
+        ctaButton.background = configuration.ctaBackground
+        ctaButton.typeface = configuration.ctaTextFont
 
         if (!sources.contains(RegisterSource.FACEBOOK) && !sources.contains(RegisterSource.GOOGLE)) {
             separator?.visibility = View.GONE

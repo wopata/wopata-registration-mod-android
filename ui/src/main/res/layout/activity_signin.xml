@@ -78,7 +78,7 @@
                 android:inputType="textPassword" />
 
             <Button
-                android:id="@+id/sign_in_button"
+                android:id="@+id/register_cta_button"
                 style="@style/RegisterButton"
                 android:layout_marginTop="@dimen/register_screen_spacing"
                 android:text="@string/LoginButtonTitle" />

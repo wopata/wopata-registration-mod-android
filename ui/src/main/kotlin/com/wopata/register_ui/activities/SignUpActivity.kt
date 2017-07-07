@@ -1,7 +1,6 @@
 package com.wopata.register_ui.activities
 
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import butterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
@@ -14,7 +13,6 @@ import com.wopata.register_ui.R
  */
 class SignUpActivity : AbstractRegisterActivity() {
 
-    private val signUpButton: Button by bindView(R.id.sign_up_button)
     private val signInButton: TextView by bindView(R.id.sign_up_sign_in_button)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +20,7 @@ class SignUpActivity : AbstractRegisterActivity() {
 
         toolbar.title = getString(R.string.SignUpTitle)
 
-        signUpButton.setOnClickListener {
+        ctaButton.setOnClickListener {
             signUp()
         }
         passwordEditText?.setOnEditorActionListener { _, _, _ ->

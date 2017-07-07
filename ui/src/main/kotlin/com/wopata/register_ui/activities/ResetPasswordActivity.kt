@@ -13,14 +13,12 @@ import com.wopata.register_ui.R
  */
 class ResetPasswordActivity : AbstractRegisterActivity() {
 
-    private val resetButton: Button by bindView(R.id.reset_button)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         toolbar.title = getString(R.string.ResetTitle)
 
-        resetButton.setOnClickListener {
+        ctaButton.setOnClickListener {
             reset()
         }
         usernameEditText.setOnEditorActionListener { _, _, _ ->
