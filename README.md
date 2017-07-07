@@ -1,6 +1,6 @@
 # Register module
 [![](https://jitpack.io/v/wopata/wopata-registration-mod-android.svg)](https://jitpack.io/#wopata/wopata-registration-mod-android)
-[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=15)
+[![API](https://img.shields.io/badge/API-15%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![GitHub
 license](http://img.shields.io/badge/license-APACHE2-blue.svg)](https://github.com/wopata/wopata-registration-mod-android/blob/master/LICENSE)
 
