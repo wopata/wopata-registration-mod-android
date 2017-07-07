@@ -13,6 +13,10 @@ The idea is to avoid duplicating the registration process by letting you focus o
 
 A [sequence](docs/workflow.graphml) diagram explains how the library behaves.
 
+Landing | SignIn | SignUp
+---- | ---- | ----
+![Landing](art/landing.png) | ![SignIn](art/signin.png) | ![SignUp](art/signup.png)
+
 ## Gradle Dependency
 
 Add this in your root `build.gradle` file:
