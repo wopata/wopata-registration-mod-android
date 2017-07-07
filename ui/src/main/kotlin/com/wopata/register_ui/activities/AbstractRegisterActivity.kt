@@ -15,6 +15,7 @@ import android.text.style.StyleSpan
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
 import butterknife.bindOptionalView
@@ -37,6 +38,7 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
     protected val passwordEditText: MaterialEditText? by bindOptionalView(R.id.login_password_edittext)
     protected val facebookButton: Button? by bindOptionalView(R.id.register_facebook)
     protected val googleButton: Button? by bindOptionalView(R.id.register_google)
+    protected val separator: ViewGroup? by bindOptionalView(R.id.register_separator)
     private val container: FrameLayout by bindView(R.id.register_activity_container)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,26 +52,34 @@ abstract class AbstractRegisterActivity : AppCompatActivity() {
 
         val sources = ConfigurationManager.sharedInstance(this).sources
 
-        if (sources.contains(RegisterSource.FACEBOOK)) {
-            facebookButton?.visibility = View.VISIBLE
-            configureSocialButton(facebookButton, getString(R.string.LoginWithFacebook), R.drawable.ic_facebook, "Facebook")
-
-            facebookButton?.setOnClickListener {
-                RegisterManager.login(this, RegisterSource.FACEBOOK)
-            }
-        } else {
+        if (!sources.contains(RegisterSource.FACEBOOK) && !sources.contains(RegisterSource.GOOGLE)) {
+            separator?.visibility = View.GONE
             facebookButton?.visibility = View.GONE
-        }
-
-        if (sources.contains(RegisterSource.GOOGLE)) {
-            googleButton?.visibility = View.VISIBLE
-            configureSocialButton(googleButton, getString(R.string.LoginWithGoogle), R.drawable.ic_google, "Google")
-
-            googleButton?.setOnClickListener {
-                RegisterManager.login(this, RegisterSource.GOOGLE)
-            }
-        } else {
             googleButton?.visibility = View.GONE
+        } else {
+            separator?.visibility = View.VISIBLE
+
+            if (sources.contains(RegisterSource.FACEBOOK)) {
+                facebookButton?.visibility = View.VISIBLE
+                configureSocialButton(facebookButton, getString(R.string.LoginWithFacebook), R.drawable.ic_facebook, "Facebook")
+
+                facebookButton?.setOnClickListener {
+                    RegisterManager.login(this, RegisterSource.FACEBOOK)
+                }
+            } else {
+                facebookButton?.visibility = View.GONE
+            }
+
+            if (sources.contains(RegisterSource.GOOGLE)) {
+                googleButton?.visibility = View.VISIBLE
+                configureSocialButton(googleButton, getString(R.string.LoginWithGoogle), R.drawable.ic_google, "Google")
+
+                googleButton?.setOnClickListener {
+                    RegisterManager.login(this, RegisterSource.GOOGLE)
+                }
+            } else {
+                googleButton?.visibility = View.GONE
+            }
         }
     }
 

@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val configuration = ConfigurationManager.sharedInstance(this)
         brandbackgroundView.setImageDrawable(configuration.landingBackground)
         brandImageView.setImageDrawable(configuration.landingBrand)
+        textView.setTextColor(configuration.landingTextColor)
         textView.text = configuration.landingText
         textView.typeface = configuration.landingTextFont
         startButton.setTextColor(configuration.ctaTextColor)

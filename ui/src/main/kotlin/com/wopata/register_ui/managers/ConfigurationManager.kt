@@ -29,6 +29,7 @@ class ConfigurationManager private constructor(context: Context) {
     var landingBrand: Drawable? = null
     var landingBrandMargin: Int = context.resources.getDimensionPixelSize(R.dimen.register_screen_spacing)
     var landingText: String? = null
+    var landingTextColor: Int = Color.WHITE
     var landingTextFont: Typeface = Typeface.SANS_SERIF
 
     var ctaBackground: Drawable = ContextCompat.getDrawable(context, R.drawable.bg_button_default)
