@@ -2,7 +2,7 @@ package com.wopata.register_ui.activities
 
 import android.os.Bundle
 import android.widget.TextView
-import butterknife.bindView
+import kotterknife.bindView
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_core.models.User

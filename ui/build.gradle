@@ -1,6 +1,6 @@
 apply from: '../library.gradle'
 
-def appcompat_version = "25.3.1"
+def appcompat_version = "26.0.2"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -14,9 +14,6 @@ dependencies {
 
     compile "com.android.support:appcompat-v7:$appcompat_version"
 
-    compile ('com.jakewharton:kotterknife:0.1.0-SNAPSHOT') {
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-    }
+    compile 'com.jakewharton:kotterknife:0.1.0-SNAPSHOT'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

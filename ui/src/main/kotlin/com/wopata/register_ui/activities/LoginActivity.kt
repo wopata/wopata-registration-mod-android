@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.bindView
+import kotterknife.bindView
 import com.wopata.register_ui.R
 import com.wopata.register_ui.extensions.afterMeasured
 import com.wopata.register_ui.managers.ConfigurationManager

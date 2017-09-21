@@ -18,14 +18,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.FrameLayout
-import butterknife.bindOptionalView
-import butterknife.bindView
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_ui.R
 import com.wopata.register_ui.managers.ConfigurationManager
+import kotterknife.bindOptionalView
+import kotterknife.bindView
 import java.util.regex.Pattern
 
 /**

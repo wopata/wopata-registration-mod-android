@@ -8,13 +8,13 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
-import butterknife.bindView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.wopata.register_core.managers.RegisterManager
 import com.wopata.register_core.models.RegisterSource
 import com.wopata.register_core.models.User
 import com.wopata.register_ui.activities.LoginActivity
 import com.wopata.register_ui.managers.ConfigurationManager
+import kotterknife.bindView
 
 class MainActivity : AppCompatActivity() {
 
